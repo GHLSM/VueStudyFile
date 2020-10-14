@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <style>
+        .classA {
+            color: red;
+        }
+        .classB {
+            background-color: blue;
+        }
+        .classC {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<!--
+    1.理解
+        在应用界面中，某些（个）元素的样式是变化的
+        class和style绑定就是专门实现动态央视效果的技术
+    2.class绑定    :class=""
+        class内部可以是对象，字符串，数组
+    3.style绑定   :style="{ color:activeColor , fonSize: fontSize + 'px'}"
+        其中activeColor，fontSize为data的属性值
+    -->
+
+<div id="demo">
+    <h2>class绑定：xxx</h2>
+    <p :class="myClass">xxx</p>
+<!--什么时候使用对象形式？类名确定，但不确定有咩有    -->
+<!--    动静类名可以同时存在，并集-->
+    <p class="classC" :class="{ classA: hasA, classB: hasB}">yyy</p>
+    <p :class="['classA', 'classB']">yyy</p>
+
+    <h2>style绑定</h2>
+    <p :style="{color:activeColor, fonSize:fontSize + 'px'}"></p>
+<!--<button v-on:click=""></button>-->
+<button @click="myButton" id="update">更新</button>
+
+</div>
+<script src="./vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: "#demo",
+        data: {
+            myClass: "classA",
+            hasA:true,
+            hasB:false,
+            activeColor:'red',
+            fontSize:20,
+        },
+        methods:{
+            myButton(){
+                // $('#update').attr('class').toggle('classB') 是错的
+                this.myClass = 'classB';
+                this.hasA = !this.hasA;
+                this.hasB = !this.hasB;
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

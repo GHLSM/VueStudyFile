@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+
+</head>
+<body>
+<script src="./vue.js" type="text/javascript"></script>
+<script type="text/javascript">
+    /*
+    需求：
+        1.给P添加一个新属性，fullname=firstname+'-'+lastname
+        2.如果修改了firstname或者lastname，fullname也要随着改变
+        3.修改了fullname，firstname和lastname也要随之改变
+    */
+    /*
+    * 关于回调函数的三个问题：
+    * 1.函数什么时候执行？
+    * 2.用来做什么的？
+    * 3.this是谁？
+    * */
+    /*
+    * Object.defineProperty()方法会直接在对象上定义一个属性，或者修改一个现有属性
+    * get(){return}  //也叫做getter   指属性的get方法   监视依赖数据
+    * set(value){}  //也叫做setter   指属性的set方法   监视当前数据
+    * */
+    const p = {
+        firstName:"A",
+        lastName:"B"
+    }
+    Object.defineProperty(p, 'fullName', { //配置对象 ==>属性描述符
+        get(){ //1.当读取属性值的时候自动调用 2.将函数返回值作为属性值  3.此时this是属性所在对象
+            return this.firstName+'-'+this.lastName;
+        },
+        set(value){ //1.修改了属性值的时候调用 2.监视属性值的变化 3.this是此时this是属性所在对象
+            //value的值是修改后属性的最新值
+            const name = value.split('-')
+            this.firstName = name[0];
+            this.lastName = name[1]
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+
+<body>
+<!--组件：html + css + js-->
+<div id="app">
+    <App></App>
+</div>
+<script src="./vue.js"></script>
+<script>
+    Vue.component('myComponent', {
+        data(){
+            return {
+                msg:'here'
+            }
+        }
+
+    })
+    const vm = new Vue({
+        el:'#app',
+        data:{
+
+        },
+        templates:`
+        <div>
+            <myComponent></myComponent>
+        </div>
+        `,
+        components:{
+            myComponent
+        },
+
+    })
+</script>
+</body>
+</html>

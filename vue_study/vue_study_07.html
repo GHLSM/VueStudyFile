@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+
+<body>
+<!--组件：html + css + js-->
+<div id="app">
+    <App></App>
+</div>
+<script src="./vue.js"></script>
+<script>
+    //全局组件创建   创建后可以在任何地方使用
+    Vue.component('vHeader',{
+        template:`
+        <div>
+        我是全局组件
+</div>
+        `
+    })
+
+      //创建的App局部组件
+    const App = {
+        data () {    //data必须为一个函数，且返回一个对象
+          return {
+              msg:"我是一个组件"
+          }
+        },
+        template:`
+          <div>
+              <h3>{{ msg }}</h3>
+              <button @click="myClick">按钮</button>
+          <vHeader></vHeader>
+          </div>
+          `,
+
+        methods: {
+            myClick(){
+                this.msg = '学习局部组件';
+            }
+        }
+
+    }
+    const vm = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        components:{
+            App:App  //App  挂载子组件
+        }
+
+
+    })
+
+</script>
+
+</body>
+</html>
